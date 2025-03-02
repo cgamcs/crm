@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM - IndexedDB</title>
-    <link rel="stylesheet" href="css/tailwind.min.css">
+    <!-- <link rel="stylesheet" href="css/tailwind.min.css"> -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body class="min-h-100 bg-gray-200">
     <div class="md:flex min-h-screen md:align-top">
-        <aside class="md:w-2/5 lg:w-2/5 xl:w-1/5 bg-teal-600 px-5 py-10">
+        <aside class="md:w-2/5 lg:w-2/5 xl:w-1/5 bg-indigo-600 px-5 py-10">
             <h1 class="uppercase text-white tracking-wide text-2xl  font-bold mt-2">CRM - IndexedDB</h1>
             <p class="mt-10 text-white">Administra tus Clientes con el CRM - IndexedDB</p>
             <nav class="mt-8">
                 <a  
                     href="index.html" 
-                    class="px-3 py-1 text-white block hover:bg-teal-700 hover:text-yellow-400 "
+                    class="px-3 py-1 text-white block hover:bg-indigo-700 hover:font-bold rounded "
                 >Clientes</a>
                 <a 
                     href="nuevo-cliente.html" 
-                    class="px-3 py-1 text-white block hover:bg-teal-900 mt-2 hover:text-yellow-400 bg-teal-700"
+                    class="px-3 py-1 text-white block hover:bg-indigo-900 mt-2 hover:font-bold bg-indigo-700 rounded"
                 >Nuevo Cliente</a>
             </nav>
         </aside> <!--sidebar-->
@@ -27,48 +28,44 @@
 
             <div class="flex flex-col mt-10 items-center">
                 <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 w-10/12 md:w-8/12 lg:w-6/12">
-                    <div class=" shadow overflow-hidden sm:rounded-lg border-b border-gray-200 ">
+                    <div class=" shadow overflow-hidden sm:rounded-xl border-b border-gray-200 ">
                         <form id="formulario" class="bg-white p-3">
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">Nombre</label>
+                            <div class="mb-4 relative group">
+                                <label class="text-gray-400 hover:cursor-text transform transition-all absolute top-0 left-0 h-full flex items-center pl-4 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-0 peer-valid:-translate-y-0" for="nombre">Nombre</label>
                                 <input 
-                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    class="border-0 w-full px-4 pt-6 pb-2 text-sm peer bg-gray-100 rounded-lg outline-none"
                                     id="nombre"
                                     name="nombre"
                                     type="text"
-                                    placeholder="Nombre Cliente"
                                 />
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Correo</label>
+                            <div class="mb-4 relative group">
+                                <label class="text-gray-400 hover:cursor-text transform transition-all absolute top-0 left-0 h-full flex items-center pl-4 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-0 peer-valid:-translate-y-0" for="email">Correo</label>
                                 <input 
-                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    class="border-0 w-full px-4 pt-6 pb-2 text-sm peer bg-gray-100 rounded-lg outline-none"
                                     id="email"
                                     name="email"
                                     type="email"
-                                    placeholder="Email Cliente"
                                 />
                             </div>
 
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="telefono">Teléfono</label>
+                            <div class="mb-4 relative group">
+                                <label class="text-gray-400 hover:cursor-text transform transition-all absolute top-0 left-0 h-full flex items-center pl-4 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-0 peer-valid:-translate-y-0" for="telefono">Teléfono</label>
                                 <input 
-                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    class="border-0 w-full px-4 pt-6 pb-2 text-sm peer bg-gray-100 rounded-lg outline-none"
                                     id="telefono"
                                     name="telefono"
                                     type="tel"
-                                    placeholder="Teléfono Cliente"
                                 />
                             </div>
 
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="empresa">Empresa</label>
+                            <div class="mb-4 relative group">
+                                <label class="text-gray-400 hover:cursor-text transform transition-all absolute top-0 left-0 h-full flex items-center pl-4 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-0 peer-valid:-translate-y-0" for="empresa">Empresa</label>
                                 <input 
-                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    class="border-0 w-full px-4 pt-6 pb-2 text-sm peer bg-gray-100 rounded-lg outline-none"
                                     id="empresa"
                                     name="empresa"
                                     type="text"
-                                    placeholder="Empresa Cliente"
                                 />
                             </div>
 
@@ -77,7 +74,7 @@
 
                             <input
                                 type="submit"
-                                class="bg-teal-600 hover:bg-teal-900 w-full mt-5 p-2 text-white uppercase font-bold"
+                                class="bg-indigo-600 rounded-lg hover:bg-indigo-900 w-full mt-5 p-2 text-white uppercase font-bold rounded-lg"
                                 value="Agregar Cliente"
                             />
                         </form>
