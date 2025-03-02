@@ -17,6 +17,7 @@
 
         abrirConexion.onsuccess = function() {
             DB = abrirConexion.result
+            console.log('Se conecto correctamente')
         }
     }
 
@@ -33,6 +34,42 @@
             alerta('Todos los campos son obligatorios', 'error')
 
             return
+        }
+
+        // Crear un objeto con la informacion
+        const cliente = {
+            nombre,
+            email,
+            telefono,
+            empresa,
+            id: Date.now()
+        }
+
+        crearNuevoCliente(cliente)
+    }
+
+    function crearNuevoCliente(cliente) {
+        if (!DB) {
+            console.log('La base de datos no está conectada');
+            return;
+        }
+
+        const transaction = DB.transaction(['crm'], 'readwrite')
+
+        const objectStore = transaction.objectStore('crm')
+
+        objectStore.add(cliente)
+
+        transaction.onerror = function() {
+            alerta('Hubo un error al agregar el cliente', 'error')
+        }
+
+        transaction.oncomplete = function() {
+            alerta('Cliente agregado correctamente')
+
+            setTimeout(() => {
+                window.location.href = 'index.html'
+            }, 1000);
         }
     }
 
