@@ -1,5 +1,5 @@
 (function(){
-    let DB
+    const listadoClientes = document.querySelector('#listado-clientes')
 
     document.addEventListener('DOMContentLoaded', () => {
         crearDB()
@@ -7,7 +7,52 @@
         if(window.indexedDB.open('crm', 1)) {
             obtenerClientes()
         }
+
+        listadoClientes.addEventListener('click', eliminarCliente)
     })
+
+    function eliminarCliente(e) {
+        if(e.target.classList.contains('eliminar')) {
+            const idEliminar = Number(e.target.dataset.cliente)
+            // const confirmar = confirm('¿Deseas eliminar este cliente?')
+
+            Swal.fire({
+                title: "Estas seguro?",
+                text: "No podras deshacer la ejecucion!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, eliminar!"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  const transaction = DB.transaction(['crm'], 'readwrite')
+                  const objectStore = transaction.objectStore('crm')
+
+                  objectStore.delete(idEliminar)
+
+                  transaction.oncomplete = function() {
+                    Swal.fire({
+                        title: "Eliminado!",
+                        text: "El cliente se elimino correctamente.",
+                        icon: "success"
+                    });
+
+                    e.target.parentElement.parentElement.remove()
+                  }
+
+                  transaction.onerror = function(error) {
+                    console.log(error)
+                    Swal.fire({
+                        title: "Error",
+                        text: "Hubo un error",
+                        icon: "error"
+                    });
+                  }
+                }
+              });
+        }
+    }
 
     // Crea la base de datos de IndexedDB
     function crearDB() {
@@ -56,7 +101,7 @@
                 if(cursor) {
                     const { nombre, email, telefono, empresa, id } = cursor.value
 
-                    const listadoClientes = document.querySelector('#listado-clientes')
+                    
                     listadoClientes.innerHTML += `
                         <tr>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -71,7 +116,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5">
                                 <a href="editar-cliente.html?id=${id}" class="text-teal-600 hover:text-teal-900 mr-5">Editar</a>
-                                <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900">Eliminar</a>
+                                <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900 eliminar">Eliminar</a>
                             </td>
                         </tr>
                     `;
